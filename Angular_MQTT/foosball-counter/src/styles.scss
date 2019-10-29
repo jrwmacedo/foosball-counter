@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+html, body { height: 100%;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+$background-color: #ff0000;
+$primary-text-color: #ffffff;
+.text-centralize {
+    align-items: center;
+    justify-content: center ;
+    text-size-adjust: auto;
+}
+mat-sidenav-content{
+    background-color: $background-color; 
+    color: $primary-text-color
+}
+
+.toolbar-centralized-text {
+    margin: auto;
+}
+
+.base-content{
+    height: 88vh;
+    padding-top: 10px;
+    text-size-adjust: auto;
+}
