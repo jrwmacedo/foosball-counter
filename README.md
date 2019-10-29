@@ -14,7 +14,7 @@
 |--|--|
 |  |  
 
- 6. 4  x push buttons ( 2 x Increase / 2 x Decrease / 1 x Reset)
+ 6. 5  x push buttons ( 2 x Manual increase / 2 x Manual decrease / 1 x Reset)
  
 |![Buttons](https://github.com/jrwmacedo/foosball-counter/blob/master/images/buttons.png?raw=true)|  |
 |--|--|
