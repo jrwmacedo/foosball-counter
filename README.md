@@ -9,7 +9,10 @@
  ![[https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/](https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/)](https://i2.wp.com/randomnerdtutorials.com/wp-content/uploads/2019/05/ESP8266-NodeMCU-kit-12-E-pinout-gpio-pin.png?w=817&ssl=1)
  
  5. Two IR sensors KY032
- ![KY032](https://github.com/jrwmacedo/foosball-counter/blob/master/KY032.png?raw=true)
+ 
+| ![KY032](https://github.com/jrwmacedo/foosball-counter/blob/master/KY032.png?raw=true) |  |
+|--|--|
+|  |  |
 
  6. 4  x push buttons ( 2 x Increase / 2 x Decrease / 1 x Reset)
 ![Buttons](https://github.com/jrwmacedo/foosball-counter/blob/master/buttons.png?raw=true)
