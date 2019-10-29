@@ -1,4 +1,4 @@
-# Foosbal Counter
+# Foosball Counter
 
  1. A foosball counter developed using mycropython, IR sensors and nodemmcu V3 CH340
  2. Angular 8 for the scoreboard
