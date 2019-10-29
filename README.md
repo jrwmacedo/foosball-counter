@@ -12,13 +12,20 @@
  
 | ![KY032](https://github.com/jrwmacedo/foosball-counter/blob/master/KY032.png?raw=true) |  |
 |--|--|
-|  |  |
+|  |  
 
  6. 4  x push buttons ( 2 x Increase / 2 x Decrease / 1 x Reset)
-![Buttons](https://github.com/jrwmacedo/foosball-counter/blob/master/buttons.png?raw=true)
+ 
+|![Buttons](https://github.com/jrwmacedo/foosball-counter/blob/master/buttons.png?raw=true)|  |
+|--|--|
+|  |  |
 
  7. Wires to make the connection based on the pinout configured in the boot.py 
-![Wires](https://github.com/jrwmacedo/foosball-counter/blob/master/wires.png?raw=true)
+ 
+| ![Wires](https://github.com/jrwmacedo/foosball-counter/blob/master/wires.png?raw=true) |  |
+|--|--|
+|  |  |
+
 # Python Files
 
  1. boot.py - Boot configurations (Pinout, Wifi information, MQTT Serve configuration)
