@@ -1,5 +1,6 @@
 env:
 - DOCKER_COMPOSE_VERSION=1.24.0
+- BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
 services:
 - docker
 before_install:
@@ -8,4 +9,4 @@ before_install:
 - chmod +x docker-compose
 - sudo mv docker-compose /usr/local/bin
 script:
-- docker build -t foosballcounter:$TRAVIS_BRANCH -f Angular_MQTT/foosball-counter/Dockerfile Angular_MQTT/foosball-counter
+- docker build -t foosballcounter:$BRANCH -f Angular_MQTT/foosball-counter/Dockerfile Angular_MQTT/foosball-counter
