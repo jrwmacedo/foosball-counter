@@ -1,0 +1,8 @@
+# Blacklist all
+.*
+
+# Whitelist
+!Foosball_Counter/*.py
+!Angular_MQTT
+!.gitignore
+!*.py
