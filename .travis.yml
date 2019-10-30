@@ -8,4 +8,4 @@ before_install:
 - chmod +x docker-compose
 - sudo mv docker-compose /usr/local/bin
 script:
-- docker build -t 1 -f Angular_MQTT/foosball-counter/Dockerfile Angular_MQTT/foosball-counter
+- docker build -t foosballcounter:${TRAVIS_BRANCH} -f Angular_MQTT/foosball-counter/Dockerfile Angular_MQTT/foosball-counter
