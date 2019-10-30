@@ -1,8 +1,12 @@
-# Blacklist all
-.*
+# Blacklist everything
+/*
 
 # Whitelist
-!Foosball_Counter/*.py
-!Angular_MQTT
+!LICENSE
 !.gitignore
-!*.py
+!README.md
+!Foosball_Counter/*.py
+!Angular_MQTT/
+!images/
+!.mergify.yml
+!.travis.yml
