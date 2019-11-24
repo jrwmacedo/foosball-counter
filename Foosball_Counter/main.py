@@ -1,37 +1,43 @@
-from boot import PIN_SENSOR_TEAM_1, PIN_SENSOR_TEAM_2, station, ssid, password
+import time
+
+from boot import station, ssid, password, PIN_PLUS_TEAM_1, \
+    PIN_PLUS_TEAM_2, connecting_interval_reset_counter
 from button import setupButtons, team_1, team_2, plusButtonManagement, minusButtonManagement, resetCounterManagement, \
     checkMQQTMode
-from connection import connect_and_subscribe, restart_and_reconnect, client
+from connection import connect_and_subscribe, client
 from sensor import Sensor
 
-sensor_1 = Sensor(PIN_SENSOR_TEAM_1)
-sensor_2 = Sensor(PIN_SENSOR_TEAM_2)
+sensor_1 = Sensor(PIN_PLUS_TEAM_1)
+sensor_2 = Sensor(PIN_PLUS_TEAM_2)
+
 try:
+    team_1.display.startDisplay()
+    team_2.display.startDisplay()
     setupButtons()
     checkMQQTMode(client)
     if client.MQTTMode:
         station.active(True)
         station.connect(ssid, password)
-
-        while not station.isconnected():
+        timeout = time.time()
+        while not station.isconnected() and (time.time() - timeout) < connecting_interval_reset_counter:
             pass
-
+            print('The timeout is' + str(time.time() - timeout))
         print('Connection successful')
         print(station.ifconfig())
 
         connect_and_subscribe()
-    else:
-        print('Working locally...')
-
+        team_1.display.tm.show('OLN ')
+        team_2.display.tm.show('OLN ')
+        time.sleep(3)
 
 except OSError as e:
     print('Exception:' + str(e))
-    restart_and_reconnect()
+    checkMQQTMode(client, True)
+
+resetCounterManagement(client, team_1, team_2, True)
 
 while True:
     try:
-        sensor_1.presenceDetected(client, team_1)
-        sensor_2.presenceDetected(client, team_2)
         client.check_msg()
         plusButtonManagement(client, team_1)
         plusButtonManagement(client, team_2)
@@ -39,4 +45,6 @@ while True:
         minusButtonManagement(client, team_2)
         resetCounterManagement(client, team_1, team_2)
     except OSError as e:
-        restart_and_reconnect()
+        checkMQQTMode(client, True)
+        team_1.display.tm.number(team_1.counter)
+        team_2.display.tm.number(team_2.counter)

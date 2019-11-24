@@ -1,5 +1,7 @@
 import time
+
 from machine import Pin
+
 from counter import Counter
 from message import checkMessageToSend
 

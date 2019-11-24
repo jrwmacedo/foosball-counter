@@ -11,3 +11,4 @@ def checkMessageToSend(client, team: Counter, forcesend: bool = False):
             print('Locally counting...' + team.teamName + ":" + str(team.counter))
 
         team.last_counter = team.counter
+        team.display.tm.number(team.counter)

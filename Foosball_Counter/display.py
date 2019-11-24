@@ -1,6 +1,8 @@
 import time
-import tm1637
+
 from machine import Pin
+
+import tm1637
 
 
 class Display:
@@ -11,4 +13,4 @@ class Display:
     def startDisplay(self):
         self.tm.show(self.initmessage)
         time.sleep(3)
-        self.tm.number(0)
+        self.tm.show('W8  ')

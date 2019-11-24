@@ -24,22 +24,26 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-from micropython import const
-from machine import Pin
 from time import sleep_us, sleep_ms
 
+from machine import Pin
+from micropython import const
+
 TM1637_CMD1 = const(64)  # 0x40 data command
-TM1637_CMD2 = const(192) # 0xC0 address command
-TM1637_CMD3 = const(128) # 0x80 display control command
-TM1637_DSP_ON = const(8) # 0x08 display on
-TM1637_DELAY = const(10) # 10us delay between clk/dio pulses
+TM1637_CMD2 = const(192)  # 0xC0 address command
+TM1637_CMD3 = const(128)  # 0x80 display control command
+TM1637_DSP_ON = const(8)  # 0x08 display on
+TM1637_DELAY = const(10)  # 10us delay between clk/dio pulses
 TM1637_MSB = const(128)  # msb is the decimal point or the colon depending on your display
 
 # 0-9, a-z, blank, dash, star
-_SEGMENTS = bytearray(b'\x3F\x06\x5B\x4F\x66\x6D\x7D\x07\x7F\x6F\x77\x7C\x39\x5E\x79\x71\x3D\x76\x06\x1E\x76\x38\x55\x54\x3F\x73\x67\x50\x6D\x78\x3E\x1C\x2A\x76\x6E\x5B\x00\x40\x63')
+_SEGMENTS = bytearray(
+    b'\x3F\x06\x5B\x4F\x66\x6D\x7D\x07\x7F\x6F\x77\x7C\x39\x5E\x79\x71\x3D\x76\x06\x1E\x76\x38\x55\x54\x3F\x73\x67\x50\x6D\x78\x3E\x1C\x2A\x76\x6E\x5B\x00\x40\x63')
+
 
 class TM1637(object):
     """Library for quad 7-segment LED modules based on the TM1637 LED driver."""
+
     def __init__(self, clk, dio, brightness=7):
         self.clk = clk
         self.dio = dio
@@ -140,17 +144,17 @@ class TM1637(object):
         """Convert a character 0-9, a-z, space, dash or star to a segment."""
         o = ord(char)
         if o == 32:
-            return _SEGMENTS[36] # space
+            return _SEGMENTS[36]  # space
         if o == 42:
-            return _SEGMENTS[38] # star/degrees
+            return _SEGMENTS[38]  # star/degrees
         if o == 45:
-            return _SEGMENTS[37] # dash
+            return _SEGMENTS[37]  # dash
         if o >= 65 and o <= 90:
-            return _SEGMENTS[o-55] # uppercase A-Z
+            return _SEGMENTS[o - 55]  # uppercase A-Z
         if o >= 97 and o <= 122:
-            return _SEGMENTS[o-87] # lowercase a-z
+            return _SEGMENTS[o - 87]  # lowercase a-z
         if o >= 48 and o <= 57:
-            return _SEGMENTS[o-48] # 0-9
+            return _SEGMENTS[o - 48]  # 0-9
         raise ValueError("Character out of range: {:d} '{:s}'".format(o, chr(o)))
 
     def hex(self, val):
@@ -172,18 +176,18 @@ class TM1637(object):
         num2 = max(-9, min(num2, 99))
         segments = self.encode_string('{0:0>2d}{1:0>2d}'.format(num1, num2))
         if colon:
-            segments[1] |= 0x80 # colon on
+            segments[1] |= 0x80  # colon on
         self.write(segments)
 
     def temperature(self, num):
         if num < -9:
-            self.show('lo') # low
+            self.show('lo')  # low
         elif num > 99:
-            self.show('hi') # high
+            self.show('hi')  # high
         else:
             string = '{0: >2d}'.format(num)
             self.write(self.encode_string(string))
-        self.write([_SEGMENTS[38], _SEGMENTS[12]], 2) # degrees C
+        self.write([_SEGMENTS[38], _SEGMENTS[12]], 2)  # degrees C
 
     def show(self, string, colon=False):
         segments = self.encode_string(string)
@@ -196,7 +200,7 @@ class TM1637(object):
         data = [0] * 8
         data[4:0] = list(segments)
         for i in range(len(segments) + 5):
-            self.write(data[0+i:4+i])
+            self.write(data[0 + i:4 + i])
             sleep_ms(delay)
 
 
@@ -213,11 +217,11 @@ class TM1637Decimal(TM1637):
         Convert an up to 4 character length string containing 0-9, a-z,
         space, dash, star and '.' to an array of segments, matching the length of
         the source string."""
-        segments = bytearray(len(string.replace('.','')))
+        segments = bytearray(len(string.replace('.', '')))
         j = 0
         for i in range(len(string)):
             if string[i] == '.' and j > 0:
-                segments[j-1] |= TM1637_MSB
+                segments[j - 1] |= TM1637_MSB
                 continue
             segments[j] = self.encode_char(string[i])
             j += 1

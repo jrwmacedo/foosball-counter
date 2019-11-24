@@ -1,5 +1,7 @@
 import time
+
 import machine
+
 from boot import client_id, mqtt_server, topic_sub
 from button import team_1, team_2
 from message import checkMessageToSend
