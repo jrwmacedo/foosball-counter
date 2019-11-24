@@ -17,7 +17,7 @@ import {
 export const MQTT_PUBLISH_TOPIC = 'notification';
 export const MQTT_CONNECTED_MESSAGE = 'connected';
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
-  hostname: 'localhost',
+  hostname: '192.168.1.1',
   port: 9001,
   path: '/'
 };

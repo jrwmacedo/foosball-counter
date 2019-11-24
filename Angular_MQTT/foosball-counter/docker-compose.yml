@@ -10,8 +10,15 @@ services: # Here we define our service(s)
       - /volume1/docker/mqtt/config:/mosquitto/config
       - /volume1/docker/mqtt/data:/mosquitto/data
       - /volume1/docker/mqtt/log:/mosquitto/log
+    networks:
+      - internal1
   angular-service: # The name of the service
     container_name: angularcontainer  # Container name
     build: ../foosball-counter # Location of our Dockerfile
     ports:
       - "90:80/tcp"
+    networks:
+      - internal1
+networks:
+  internal1:
+    driver: "bridge"
